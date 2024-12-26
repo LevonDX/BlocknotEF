@@ -13,6 +13,6 @@ namespace BlocknotEF.Data.Entities
 
         [ForeignKey("Country")]
         public int CountryId { get; set; }
-        public virtual Country Country { get; set; } = new Country();
+        public virtual Country? Country { get; set; }
     }
 }

@@ -15,8 +15,12 @@ namespace BlocknotEF.Services.Asbtract
 
         Task<Record?> GetRecordByName(string name);
 
+        Task<List<Record>> SearchRecordsByName(string name);
+
         Task CreateRecordAsync(Record record);
 
         Task UpdateRecord(Record record);
+
+        Task<bool> CityExists(string? cityName);
     }
 }

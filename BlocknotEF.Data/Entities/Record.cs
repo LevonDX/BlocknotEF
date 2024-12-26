@@ -23,5 +23,10 @@ namespace BlocknotEF.Data.Entities
         [ForeignKey("City")]
         public int? CityId { get; set; }
         public virtual City? City { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Id} {Name} {City?.Name}";
+        }
     }
 }

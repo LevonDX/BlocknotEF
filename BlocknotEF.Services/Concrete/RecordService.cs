@@ -12,52 +12,72 @@ namespace BlocknotEF.Services.Concrete
 {
     public class RecordService : IRecordService
     {
-        BlocknotDbContext _bocknotDbContext = new BlocknotDbContext();
+        BlocknotDbContext _blocknotDbContext = new BlocknotDbContext();
+
+        public async Task<bool> CityExists(string? cityName)
+        {
+            if (string.IsNullOrEmpty(cityName))
+            {
+                return false;
+            }
+
+            bool exists = await _blocknotDbContext.Cities
+                .AnyAsync(c => c.Name.ToLower() == cityName.ToLower());
+
+            return exists;
+        }
 
         public async Task CreateRecordAsync(Record record)
         {
-            try
-            {
-                await _bocknotDbContext.Records.AddAsync(record);
-                await _bocknotDbContext.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                
-            }
+            await _blocknotDbContext.Records.AddAsync(record);
+            await _blocknotDbContext.SaveChangesAsync();
         }
 
         public void Dispose()
         {
-            _bocknotDbContext.Dispose();
+            _blocknotDbContext.Dispose();
         }
 
         public async Task<Record?> GetRecord(int id)
         {
-            Record? record = await _bocknotDbContext.Records.FindAsync(id);
+            Record? record = await _blocknotDbContext.Records.FindAsync(id);
 
             return record;
         }
 
         public async Task<Record?> GetRecordByName(string name)
         {
-            Record? record = await _bocknotDbContext.Records.FirstOrDefaultAsync(r => r.Name == name);
+            Record? record = await _blocknotDbContext.Records.FirstOrDefaultAsync(r => r.Name == name);
 
             return record;
         }
 
         public async Task<List<Record>> GetRecords()
         {
-            var records = await _bocknotDbContext.Records.ToListAsync();
+            var records = await _blocknotDbContext.Records
+                .Include(r => r.City)
+                    .ThenInclude(c => c.Country)
+
+                .ToListAsync();
+
+            return records;
+        }
+
+        public async Task<List<Record>> SearchRecordsByName(string name)
+        {
+            List<Record> records = await _blocknotDbContext.Records
+                .Include(r => r.City)
+                .Where(r => r.Name.Contains(name))
+                .ToListAsync();
 
             return records;
         }
 
         public async Task UpdateRecord(Record record)
         {
-            _bocknotDbContext.Update(record);
+            _blocknotDbContext.Update(record);
 
-            await _bocknotDbContext.SaveChangesAsync();
+            await _blocknotDbContext.SaveChangesAsync();
         }
     }
 }
