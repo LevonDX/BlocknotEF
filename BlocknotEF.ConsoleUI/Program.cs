@@ -1,61 +1,33 @@
 ﻿using BlocknotEF.Data.Entities;
-using BlocknotEF.Services.Asbtract;
-using BlocknotEF.Services.Concrete;
-using BlocknotEF.Services.Enums;
+using BlocknotEF.Services.Models;
+using Newtonsoft.Json;
 
 namespace BlocknotEF.ConsoleUI
 {
     internal class Program
     {
-        private static void ShowMenuItems()
-        {
-            foreach (string item in Enum.GetNames<MenuItems>())
-            {
-                Console.WriteLine(item);
-            }
-        }
-
         static async Task Main(string[] args)
         {
-            ShowMenuItems();
-            using IRecordService _recordService = new RecordService();
+            string baseUrl = "http://localhost:5087";
 
-            MenuItems choice;
-            string? menuItem;
-            do
-            {
-                Console.Write("Choose menu item-> ");
-                menuItem = Console.ReadLine();
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(baseUrl);
 
-            } while (!Enum.TryParse<MenuItems>(menuItem, true, out choice));
+            //var response = await httpClient.GetAsync("api/record/get-records");
 
-            switch (choice)
-            {
-                case MenuItems.Add:
-                    Record record = await RecordInputHelper.InputRecordAsync();
-                    break;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    string content = await response.Content.ReadAsStringAsync();
+            //    List<RecordModel>? records = JsonConvert.DeserializeObject<List<RecordModel>>(content);
 
-                case MenuItems.Search:
-                    Console.Write("Enter name to search:");
-                    string? name = Console.ReadLine();
-
-                    if (string.IsNullOrEmpty(name))
-                    {
-                        Console.WriteLine("Name is empty");
-                        break;
-                    }
-
-                    List<Record> foundRecord = await _recordService.SearchRecordsByName(name);
-
-                    foundRecord.ForEach(r => Console.WriteLine(r));
-
-                    break;
-
-                case MenuItems.Show:
-                    List<Record> records = await _recordService.GetRecords();
-                    records.ForEach(r => Console.WriteLine(r));
-                    break;
-            }
+            //    if (records != null && records.Count > 0)
+            //    {
+            //        foreach (RecordModel record in records)
+            //        {
+            //            Console.WriteLine($"{record.Id} {record.Name} {record.Surname} {record.PhoneNumber}");
+            //        }
+            //    }
+            //}
         }
     }
 }

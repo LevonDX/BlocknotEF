@@ -1,6 +1,7 @@
 ﻿using BlocknotEF.Data.Context;
 using BlocknotEF.Data.Entities;
-using BlocknotEF.Services.Asbtract;
+using BlocknotEF.Services.Abstract;
+using BlocknotEF.Services.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,72 +13,39 @@ namespace BlocknotEF.Services.Concrete
 {
     public class RecordService : IRecordService
     {
-        BlocknotDbContext _blocknotDbContext = new BlocknotDbContext();
+        BlocknotDbContext _dbContext = new BlocknotDbContext();
 
-        public async Task<bool> CityExists(string? cityName)
+        public async Task AddRecord(RecordModel record)
         {
-            if (string.IsNullOrEmpty(cityName))
+            Record record1 = new Record
             {
-                return false;
+                Name = record.Name,
+                Surname = record.Surname,
+                PhoneNumber = record.PhoneNumber
+            };
+
+            await _dbContext.Records.AddAsync(record1);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<RecordModel>> GetRecords()
+        {
+            List<Record> records = await _dbContext.Records.ToListAsync();
+
+            List<RecordModel> model = new List<RecordModel>();
+
+            foreach (Record record in records)
+            {
+                model.Add(new RecordModel
+                {
+                    Id = record.Id,
+                    Name = record.Name,
+                    Surname = record.Surname,
+                    PhoneNumber = record.PhoneNumber
+                });
             }
 
-            bool exists = await _blocknotDbContext.Cities
-                .AnyAsync(c => c.Name.ToLower() == cityName.ToLower());
-
-            return exists;
-        }
-
-        public async Task CreateRecordAsync(Record record)
-        {
-            await _blocknotDbContext.Records.AddAsync(record);
-            await _blocknotDbContext.SaveChangesAsync();
-        }
-
-        public void Dispose()
-        {
-            _blocknotDbContext.Dispose();
-        }
-
-        public async Task<Record?> GetRecord(int id)
-        {
-            Record? record = await _blocknotDbContext.Records.FindAsync(id);
-
-            return record;
-        }
-
-        public async Task<Record?> GetRecordByName(string name)
-        {
-            Record? record = await _blocknotDbContext.Records.FirstOrDefaultAsync(r => r.Name == name);
-
-            return record;
-        }
-
-        public async Task<List<Record>> GetRecords()
-        {
-            var records = await _blocknotDbContext.Records
-                .Include(r => r.City)
-                    .ThenInclude(c => c.Country)
-
-                .ToListAsync();
-
-            return records;
-        }
-
-        public async Task<List<Record>> SearchRecordsByName(string name)
-        {
-            List<Record> records = await _blocknotDbContext.Records
-                .Include(r => r.City)
-                .Where(r => r.Name.Contains(name))
-                .ToListAsync();
-
-            return records;
-        }
-
-        public async Task UpdateRecord(Record record)
-        {
-            _blocknotDbContext.Update(record);
-
-            await _blocknotDbContext.SaveChangesAsync();
+            return model;
         }
     }
 }

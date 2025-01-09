@@ -5,11 +5,11 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlocknotEF.Data", "BlocknotEF.Data\BlocknotEF.Data.csproj", "{BBE52B2B-ADAC-4E54-A60D-145216197002}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlocknotEF.Services", "BlocknotEF.Services\BlocknotEF.Services.csproj", "{37001C14-2830-4E1E-8E9B-FFAEBB609336}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlocknotEF.ConsoleUI", "BlocknotEF.ConsoleUI\BlocknotEF.ConsoleUI.csproj", "{9FAB8B86-657B-4CF5-9371-FCEC0AC7952E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlocknotEF.Deskop", "BlocknotEF.Deskop\BlocknotEF.Deskop.csproj", "{C8715160-C464-466E-88ED-CAC0CF47CA1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlocknotEF.API", "BlocknotEF.API\BlocknotEF.API.csproj", "{2B399D28-767A-4C05-88CE-2C747F8B6DCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlocknotEF.Services", "BlocknotEF.Services\BlocknotEF.Services.csproj", "{DDF3CD32-9641-47AF-A7E5-519E9CF3461A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +21,18 @@ Global
 		{BBE52B2B-ADAC-4E54-A60D-145216197002}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBE52B2B-ADAC-4E54-A60D-145216197002}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBE52B2B-ADAC-4E54-A60D-145216197002}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37001C14-2830-4E1E-8E9B-FFAEBB609336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37001C14-2830-4E1E-8E9B-FFAEBB609336}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37001C14-2830-4E1E-8E9B-FFAEBB609336}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37001C14-2830-4E1E-8E9B-FFAEBB609336}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9FAB8B86-657B-4CF5-9371-FCEC0AC7952E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9FAB8B86-657B-4CF5-9371-FCEC0AC7952E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FAB8B86-657B-4CF5-9371-FCEC0AC7952E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FAB8B86-657B-4CF5-9371-FCEC0AC7952E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8715160-C464-466E-88ED-CAC0CF47CA1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8715160-C464-466E-88ED-CAC0CF47CA1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8715160-C464-466E-88ED-CAC0CF47CA1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8715160-C464-466E-88ED-CAC0CF47CA1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B399D28-767A-4C05-88CE-2C747F8B6DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B399D28-767A-4C05-88CE-2C747F8B6DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B399D28-767A-4C05-88CE-2C747F8B6DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B399D28-767A-4C05-88CE-2C747F8B6DCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDF3CD32-9641-47AF-A7E5-519E9CF3461A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF3CD32-9641-47AF-A7E5-519E9CF3461A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDF3CD32-9641-47AF-A7E5-519E9CF3461A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDF3CD32-9641-47AF-A7E5-519E9CF3461A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
