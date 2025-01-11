@@ -1,0 +1,23 @@
+﻿<form method="post" action="/Record/Edit" class="needs-validation" novalidate>
+    <input type="hidden" name="Id" value="@Model.Id">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" name="Name" class="form-control" value="@Model.Name" required>
+        <div class="invalid-feedback">Please provide a name.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="surname" class="form-label">Surname</label>
+        <input type="text" id="surname" name="Surname" class="form-control" value="@Model.Surname" required>
+        <div class="invalid-feedback">Please provide a surname.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="phoneNumber" class="form-label">Phone Number</label>
+        <input type="text" id="phoneNumber" name="PhoneNumber" class="form-control" value="@Model.PhoneNumber" required>
+        <div class="invalid-feedback">Please provide a valid phone number.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="/Record/List" class="btn btn-secondary">Cancel</a>
+</form>

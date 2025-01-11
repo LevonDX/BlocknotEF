@@ -20,9 +20,9 @@ namespace BlocknotEF.API.Controllers
         [Route("get-records")]
         public async Task<IActionResult> GetRecords()
         {
-            List<RecordModel> records = await _recordService.GetRecords();
+            List<RecordModel> records = await _recordService.GetRecordsAsync();
 
-            return Ok(records);
+            return Ok(records); // json
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace BlocknotEF.API.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    await _recordService.AddRecord(record);
+                    await _recordService.AddRecordAsync(record);
                 }
                 else
                 {

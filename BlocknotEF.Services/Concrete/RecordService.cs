@@ -15,7 +15,7 @@ namespace BlocknotEF.Services.Concrete
     {
         BlocknotDbContext _dbContext = new BlocknotDbContext();
 
-        public async Task AddRecord(RecordModel record)
+        public async Task AddRecordAsync(RecordModel record)
         {
             Record record1 = new Record
             {
@@ -28,7 +28,25 @@ namespace BlocknotEF.Services.Concrete
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<RecordModel>> GetRecords()
+        public async Task<RecordModel?> GetRecordAsync(int id)
+        {
+            Record? record = await _dbContext.Records.FindAsync(id);
+
+            if (record == null)
+            {
+                return null;
+            }
+
+            return new RecordModel
+            {
+                Id = record.Id,
+                Name = record.Name,
+                Surname = record.Surname,
+                PhoneNumber = record.PhoneNumber
+            };
+        }
+
+        public async Task<List<RecordModel>> GetRecordsAsync()
         {
             List<Record> records = await _dbContext.Records.ToListAsync();
 
@@ -46,6 +64,17 @@ namespace BlocknotEF.Services.Concrete
             }
 
             return model;
+        }
+
+        public async Task UpdateRecordAsync(RecordModel record)
+        {
+            Record? record1 = await _dbContext.Records.FindAsync(record.Id);
+
+            record1.Name = record.Name;
+            record1.Surname = record.Surname;
+            record1.PhoneNumber = record.PhoneNumber;
+
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

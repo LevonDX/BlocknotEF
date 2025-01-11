@@ -10,7 +10,9 @@ namespace BlocknotEF.Services.Abstract
 {
     public interface IRecordService
     {
-        Task AddRecord(RecordModel record);
-        Task<List<RecordModel>> GetRecords();
+        Task AddRecordAsync(RecordModel record);
+        Task UpdateRecordAsync(RecordModel record);
+        Task<RecordModel?> GetRecordAsync(int id);
+        Task<List<RecordModel>> GetRecordsAsync();
     }
 }
